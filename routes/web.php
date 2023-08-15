@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Livewire;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,3 +15,5 @@ declare(strict_types=1);
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', Livewire\Pages\Index::class);

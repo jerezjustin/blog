@@ -50,7 +50,7 @@ class PostFactory extends Factory
             'summary' => fake()->paragraph,
             'content' => $content,
             'published' => true,
-            'user_id' => $user
+            'user_id' => $user->getKey()
         ];
     }
 }
