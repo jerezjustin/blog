@@ -1,3 +1,9 @@
+@props(['post'])
+
+@php
+    $postRoute = '';
+@endphp
+
 <div class="mb-20 last:mb-0 md:mb-0 md:p-12 md:w-full flex flex-col items-start">
     <div class="flex gap-2">
         @foreach ($post->categories as $category)
@@ -12,7 +18,7 @@
     <p class="leading-relaxed mb-8">{{ $post->summary }}</p>
 
     <div class="flex items-center flex-wrap pb-4 mb-4 border-b-2 border-gray-100 mt-auto w-full">
-        <a class="text-indigo-500 inline-flex items-center">Learn More
+        <a wire:navigate href="{{ $postRoute }}" class="text-indigo-500 inline-flex items-center">Learn More
             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"></path>
@@ -41,9 +47,7 @@
         </span>
     </div>
     <a class="inline-flex items-center">
-        <img alt="blog" src="https://dummyimage.com/104x104"
-            class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
-        <span class="flex-grow flex flex-col pl-4">
+        <span class="flex-grow flex flex-col">
             <span class="title-font font-medium text-gray-900">{{ $post->author->name }}</span>
         </span>
     </a>

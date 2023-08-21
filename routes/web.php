@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Livewire\Pages\Index::class);
+Route::get('/', Livewire\Pages\Post\Index::class)->name('posts.index');
+
+

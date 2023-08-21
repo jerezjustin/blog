@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Livewire\Pages\Index;
+use App\Livewire\Pages\Post\Index;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -16,6 +16,5 @@ beforeEach(fn () => $this->seed(DatabaseSeeder::class));
 
 it('can see index page', function (): void {
     livewire(Index::class)
-        ->assertStatus(Response::HTTP_OK)
-        ->assertSeeLivewire(\App\Livewire\Components\Post::class);
+        ->assertStatus(Response::HTTP_OK);
 });

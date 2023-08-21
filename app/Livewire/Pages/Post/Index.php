@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Pages;
+namespace App\Livewire\Pages\Post;
 
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
@@ -57,7 +57,7 @@ class Index extends Component
             ->paginate(5)
             ->withQueryString();
 
-        return view('livewire.pages.index', [
+        return view('livewire.pages.post.index', [
             'posts' => $posts
         ]);
     }
