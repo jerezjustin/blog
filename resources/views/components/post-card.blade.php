@@ -4,51 +4,88 @@
     $postRoute = '';
 @endphp
 
-<div class="mb-20 last:mb-0 md:mb-0 md:p-12 md:w-full flex flex-col items-start">
+<div
+     class="mb-20 flex flex-col items-start text-gray-600 last:mb-0 dark:text-gray-400 md:mb-0 md:w-full md:p-12">
     <div class="flex gap-2">
         @foreach ($post->categories as $category)
-            <span class="uppercase py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest">
+            <span
+                  class="rounded bg-primary-100 px-2 py-1 text-xs font-medium uppercase tracking-widest text-primary-500 dark:bg-primary-400/10">
                 {{ $category->name }}
             </span>
         @endforeach
     </div>
 
-    <h2 class="sm:text-3xl text-2xl title-font font-medium text-gray-900 mt-4 mb-4">{{ $post->title }}</h2>
+    <h2
+        class="title-font mb-4 mt-4 text-2xl font-medium text-gray-900 first-letter:uppercase dark:text-white sm:text-3xl">
+        {{ $post->title }}
+    </h2>
 
-    <p class="leading-relaxed mb-8">{{ $post->summary }}</p>
+    <p class="mb-8 leading-relaxed">
+        {{ $post->summary }}
+    </p>
 
-    <div class="flex items-center flex-wrap pb-4 mb-4 border-b-2 border-gray-100 mt-auto w-full">
-        <a wire:navigate href="{{ $postRoute }}" class="text-indigo-500 inline-flex items-center">Learn More
-            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round">
+    <div
+         class="mb-4 mt-auto flex w-full flex-wrap items-center border-b border-gray-200 pb-4 dark:border-gray-200/10">
+        <a wire:navigate
+           href="{{ $postRoute }}"
+           class="inline-flex items-center text-primary-500">
+            Learn More
+
+            <svg class="ml-2 h-4 w-4"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 fill="none"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
                 <path d="M5 12h14"></path>
                 <path d="M12 5l7 7-7 7"></path>
             </svg>
         </a>
         <span
-            class="text-gray-400 mr-3 inline-flex items-center ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-            <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                stroke-linejoin="round" viewBox="0 0 24 24">
+              class="ml-auto mr-3 inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400 dark:border-gray-200/10">
+            <svg class="mr-1 h-4 w-4"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 fill="none"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
+                <circle cx="12"
+                        cy="12"
+                        r="3"></circle>
             </svg>
 
             {{ $post->reads->count() }}
         </span>
-        <span class="text-gray-400 inline-flex items-center leading-none text-sm">
-            <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                stroke-linejoin="round" viewBox="0 0 24 24">
+        <span
+              class="inline-flex items-center text-sm leading-none text-gray-400">
+            <svg class="mr-1 h-4 w-4"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 fill="none"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24">
                 <path
-                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                      d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
                 </path>
             </svg>
 
             {{ $post->comments->count() }}
         </span>
     </div>
-    <a class="inline-flex items-center">
-        <span class="flex-grow flex flex-col">
-            <span class="title-font font-medium text-gray-900">{{ $post->author->name }}</span>
+    <a class="inline-flex cursor-pointer items-center">
+        <span class="flex flex-grow flex-col">
+            <span class="title-font text-gray-900 dark:text-white">
+                Posted by
+
+                <span
+                      class="font-medium transition-colors duration-300 ease-in-out hover:text-primary-500">
+                    {{ $post->author->name }}
+                </span>
+            </span>
         </span>
     </a>
 </div>

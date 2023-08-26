@@ -3,19 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="@yield('description', 'Blog about PHP and Javascript ecosystems.')">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <meta name="description"
+          content="@yield('description', 'Blog about PHP and Javascript ecosystems.')">
 
     <title>@yield('title', 'Blog | PHP & Javascript Ecosystems.')</title>
 
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="flex flex-col min-h-screen">
-    @include('partials.navigation')
+<body class="flex min-h-screen flex-col bg-white dark:bg-ebony-950">
+    <x-navigation />
 
-    <main class="container flex flex-1 mx-auto py-12 px-5">
+    <main class="mx-auto flex w-full max-w-screen-xl flex-1 px-5 pt-20 md:px-0">
         {{ $slot }}
     </main>
 

@@ -1,51 +1,68 @@
-<div class="flex flex-col md:flex-row flex-1 p-5">
+<div class="basis-100 flex flex-1 basis-full flex-col p-5 md:flex-row">
     <section class="md:basis-2/5 lg:basis-1/4">
         <form class="md:pr-12 md:pt-24">
-            <h2 class="sm:text-3xl text-2xl title-font font-medium text-gray-900 mb-12">
+            <h2 class="title-font mb-12 text-2xl font-medium text-gray-900 sm:text-3xl">
                 {{ __('Advanced Search') }}
             </h2>
 
             <div class="relative mb-4">
-                <label for="title" class="leading-7 text-sm text-gray-600">{{ __('Title') }}</label>
+                <x-form.label for="title"
+                              class="text-sm leading-7 text-gray-600">{{ __('Title') }}</x-form.label>
 
                 <div class="flex gap-2">
-                    <input wire:model.live.debounce.150ms="title" type="text" id="title" name="title"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    <x-form.input wire:model.live.debounce.150ms="title"
+                                  type="text"
+                                  id="title"
+                                  name="title" />
 
                     @if (!is_null($title) && $title != '')
                         <button wire:click.prevent="cleanInput('title')">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="h-5 w-5 dark:text-white">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     @endif
                 </div>
-
-                <span class="text-xs text-gray-400">Ex. How to apply SOLID principles</span>
-
             </div>
 
             <div class="relative mb-4">
-                <label for="full-name" class="leading-7 text-sm text-gray-600">{{ __('Category') }}</label>
+                <x-form.label for="full-name"
+                              class="text-sm leading-7 text-gray-600">{{ __('Category') }}</x-form.label>
 
                 <div class="flex gap-2">
-                    <select wire:model.live="category" type="text" id="full-name" name="full-name"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        <option selected hidden></option>
+                    <x-form.select wire:model.live="category"
+                                   type="text"
+                                   id="full-name"
+                                   name="full-name"
+                                   class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-primary-500 focus:ring-2 focus:ring-primary-200">
+                        <option selected
+                                hidden></option>
 
                         @foreach (\App\Models\Category::all() as $categoryItem)
                             <option value="{{ $categoryItem->slug }}">
                                 {{ $categoryItem->name }}
                             </option>
                         @endforeach
-                    </select>
+                    </x-form.select>
 
                     @if (!is_null($category) && $category != '')
                         <button wire:click.prevent="cleanInput('category')">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="h-5 w-5 dark:text-white">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     @endif
@@ -53,35 +70,64 @@
             </div>
 
             <div class="relative mb-4">
-                <label for="full-name" class="leading-7 text-sm text-gray-600">{{ __('Sort By') }}</label>
+                <x-form.label for="full-name"
+                              class="text-sm leading-7 text-gray-600">{{ __('Sort By') }}</x-form.label>
 
-                <select wire:model.live="sortBy" type="text" id="full-name" name="full-name"
-                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                    <option selected hidden></option>
+                <x-form.select wire:model.live="sortBy"
+                               type="text"
+                               id="full-name"
+                               name="full-name"
+                               class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-primary-500 focus:ring-2 focus:ring-primary-200">
+                    <option selected
+                            hidden></option>
                     <option value="title">Title</option>
                     <option value="created_at">Date</option>
-                </select>
+                </x-form.select>
             </div>
 
             <div class="relative mb-4">
-                <label for="full-name" class="leading-7 text-sm text-gray-600">{{ __('Direction') }}</label>
+                <x-form.label for="full-name"
+                              class="text-sm leading-7 text-gray-600">{{ __('Direction') }}</x-form.label>
 
-                <select wire:model.live="direction" type="text" id="full-name" name="full-name"
-                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                <x-form.select wire:model.live="direction"
+                               type="text"
+                               id="full-name"
+                               name="full-name"
+                               class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-primary-500 focus:ring-2 focus:ring-primary-200">
                     <option value="desc">Descendent</option>
                     <option value="asc">Ascendent</option>
-                </select>
+                </x-form.select>
             </div>
         </form>
     </section>
 
-    <section class="md:basis-3/5 lg:basis-3/4 border-t-2 pt-12 md:border-t-0 md:border-l-2 border-gray-100">
-        @foreach ($posts as $post)
-            <x-post-card :$post :key="$post->slug" />
-        @endforeach
+    <section
+             class="border-t border-gray-200 pt-12 dark:border-gray-200/10 md:basis-3/5 md:border-l md:border-t-0 lg:basis-3/4">
+
+        @if ($posts->count() > 0)
+            @foreach ($posts as $post)
+                <x-post-card :$post
+                             :key="$post->slug" />
+            @endforeach
+        @else
+            <div class="flex h-full w-full flex-1 flex-col items-center justify-center text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24"
+                     fill="currentColor"
+                     class="h-48 w-48">
+                    <path fill-rule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                          clip-rule="evenodd" />
+                </svg>
+
+                <span class="text-center text-xl font-medium">
+                    We couldn't find any posts about what you are looking for.
+                </span>
+            </div>
+        @endif
 
         <div class="md:p-12">
-            {{ $posts->links() }}
+            {{ $posts->links('livewire::tailwind') }}
         </div>
     </section>
 </div>
