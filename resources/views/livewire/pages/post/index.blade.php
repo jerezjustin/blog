@@ -1,7 +1,7 @@
 <div class="basis-100 flex flex-1 basis-full flex-col p-5 md:flex-row">
     <section class="md:basis-2/5 lg:basis-1/4">
         <form class="md:pr-12 md:pt-24">
-            <h2 class="title-font mb-12 text-2xl font-medium text-gray-900 sm:text-3xl">
+            <h2 class="title-font mb-12 text-2xl font-medium text-gray-900 dark:text-white sm:text-3xl">
                 {{ __('Advanced Search') }}
             </h2>
 
