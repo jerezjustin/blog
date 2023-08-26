@@ -1,1 +1,4 @@
-import './bootstrap';
+import "./bootstrap";
+import { loadColorTheme, toggleColorTheme } from "./theme-color";
+
+import "flowbite";
