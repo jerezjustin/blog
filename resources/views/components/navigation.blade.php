@@ -23,9 +23,7 @@
 
         <div class="flex items-center md:order-2">
             <button id="theme-toggle"
-                    x-data="{
-                        toggle: () => window.toggleColorTheme()
-                    }"
+                    x-data="{ toggle: () => window.toggleColorTheme() }"
                     @click="toggle"
                     type="button"
                     class="rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
@@ -72,9 +70,18 @@
             </button>
         </div>
 
-        <div class="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"
+        <div class="ml-auto mr-2 hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"
              id="navbar-sticky">
             <ul class="mt-4 flex flex-col p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:p-0">
+                @guest
+                    @if (!Route::is('login') && !Route::is('register'))
+                        <a wire:navigate
+                           href="{{ route('login') }}"
+                           class="rounded-lg bg-primary-500 px-5 py-2.5 text-center text-sm font-medium text-white transition-colors duration-300 ease-in-out hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-500 dark:hover:bg-primary-600 dark:focus:ring-primary-600">
+                            {{ __('Login') }}
+                        </a>
+                    @endif
+                @endguest
             </ul>
         </div>
     </div>
