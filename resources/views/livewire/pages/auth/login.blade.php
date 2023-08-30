@@ -1,15 +1,23 @@
-<x-form>
+<x-form wire:submit="authenticate">
     <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Sign in') }}</h5>
+
+    <div>
+        <x-form.error name="form.credentials"
+                      class="mt-6" />
+    </div>
 
     <div>
         <x-form.label for="email">
             {{ __('Email') }}
         </x-form.label>
 
-        <x-form.input type="email"
+        <x-form.input wire:model="form.email"
+                      type="email"
                       name="email"
                       id="email"
                       placeholder="name@company.com" />
+
+        <x-form.error name="form.email" />
     </div>
 
     <div>
@@ -17,10 +25,13 @@
             {{ __('Password') }}
         </x-form.label>
 
-        <x-form.input type="password"
+        <x-form.input wire:model="form.password"
+                      type="password"
                       name="password"
                       id="password"
                       placeholder="••••••••" />
+
+        <x-form.error name="form.password" />
     </div>
 
     <div class="flex items-start">

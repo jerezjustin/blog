@@ -72,6 +72,7 @@
 
         <div class="ml-auto mr-2 hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"
              id="navbar-sticky">
+
             <ul class="mt-4 flex flex-col p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:p-0">
                 @guest
                     @if (!Route::is('login') && !Route::is('register'))

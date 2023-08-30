@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Livewire\Pages\Post\Index::class)->name('posts.index');
+Route::get('/', fn () => redirect()->route('posts.index'));
+Route::get('/posts', Livewire\Pages\Post\Index::class)->name('posts.index');
 
-Route::get('/login', Livewire\Pages\Auth\Login::class)->name('login');
-Route::get('/register', Livewire\Pages\Auth\Register::class)->name('register');
-Route::get('/forgot-password', Livewire\Pages\Auth\ForgotPassword::class)->name('forgot-password');
-Route::get('/reset-password', Livewire\Pages\Auth\ResetPassword::class)->name('reset-password');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', Livewire\Pages\Auth\Login::class)->name('login');
+    Route::get('/register', Livewire\Pages\Auth\Register::class)->name('register');
+    Route::get('/forgot-password', Livewire\Pages\Auth\ForgotPassword::class)->name('forgot-password');
+    Route::get('/reset-password', Livewire\Pages\Auth\ResetPassword::class)->name('reset-password');
+});
