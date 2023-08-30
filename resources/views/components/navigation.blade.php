@@ -83,6 +83,17 @@
                         </a>
                     @endif
                 @endguest
+
+                @auth
+                    <form method="POST"
+                          action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-button type="submit">
+                            Logout
+                        </x-button>
+                    </form>
+                @endauth
             </ul>
         </div>
     </div>
