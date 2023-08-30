@@ -1,4 +1,4 @@
-<x-form>
+<x-form wire:submit="save">
     <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Sign up') }}</h5>
 
     <div>
@@ -7,11 +7,14 @@
             {{ __('Name') }}
         </x-form.label>
 
-        <x-form.input type="text"
+        <x-form.input wire:model='form.name'
+                      type="text"
                       name="name"
                       id="name"
                       class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
                       placeholder="John Doe" />
+
+        <x-form.error name="form.name" />
     </div>
 
     <div>
@@ -20,11 +23,14 @@
             {{ __('Email') }}
         </x-form.label>
 
-        <x-form.input type="email"
+        <x-form.input wire:model="form.email"
+                      type="email"
                       name="email"
                       id="email"
                       class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
                       placeholder="name@company.com" />
+
+        <x-form.error name="form.email" />
     </div>
 
     <div>
@@ -32,18 +38,22 @@
             {{ __('Password') }}
         </x-form.label>
 
-        <x-form.input type="password"
+        <x-form.input wire:model='form.password'
+                      type="password"
                       name="password"
                       id="password"
                       placeholder="••••••••" />
+
+        <x-form.error name="form.password" />
     </div>
 
     <div>
-        <x-form.label for="confirm_password">
+        <x-form.label for="form.confirm_password">
             {{ __('Confirm Password') }}
         </x-form.label>
 
-        <x-form.input type="confirm_password"
+        <x-form.input wire:model='form.password_confirmation'
+                      type="password"
                       name="confirm_password"
                       id="confirm_password"
                       placeholder="••••••••" />
