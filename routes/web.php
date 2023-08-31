@@ -21,14 +21,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn () => redirect()->route('posts.index'))->name('home');
 Route::get('/posts', Livewire\Pages\Post\Index::class)->name('posts.index');
 
-Route::middleware('guest')->group(function () {
+Route::middleware('guest')->group(function (): void {
     Route::get('/login', Livewire\Pages\Auth\Login::class)->name('login');
     Route::get('/register', Livewire\Pages\Auth\Register::class)->name('register');
-    Route::get('/forgot-password', Livewire\Pages\Auth\ForgotPassword::class)->name('forgot-password');
-    Route::get('/reset-password', Livewire\Pages\Auth\ResetPassword::class)->name('reset-password');
+    Route::get('/forgot-password', Livewire\Pages\Auth\ForgotPassword::class)->name('password.store');
+    Route::get('/reset-password/{token}', Livewire\Pages\Auth\ResetPassword::class)->name('password.reset');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function (): void {
     Route::post('/logout', function (Request $request) {
         Auth::guard('web')->logout();
 
