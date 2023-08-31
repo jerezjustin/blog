@@ -2,7 +2,7 @@
     <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Sign in') }}</h5>
 
     <div>
-        <x-form.error name="form.credentials"
+        <x-form.error name="credentials"
                       class="mt-6" />
     </div>
 
@@ -49,7 +49,7 @@
         </div>
 
         <a wire:navigate
-           href="{{ route('forgot-password') }}"
+           href="{{ route('password.store') }}"
            class="ml-auto text-sm text-primary-700 hover:underline dark:text-primary-500">
             {{ __('Forgot Password?') }}
         </a>

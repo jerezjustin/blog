@@ -1,4 +1,4 @@
-<x-form wire:submit="save">
+<x-form wire:submit="register">
     <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Sign up') }}</h5>
 
     <div>

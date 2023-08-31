@@ -1,10 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Forms\Auth;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 
@@ -21,14 +20,7 @@ class RegisterForm extends Form
 
     public $password_confirmation;
 
-    public function register()
+    public function register(): void
     {
-        $user = User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password)
-        ]);
-
-        Auth::login($user);
     }
 }

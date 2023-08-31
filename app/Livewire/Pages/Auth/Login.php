@@ -7,6 +7,7 @@ namespace App\Livewire\Pages\Auth;
 use App\Livewire\Forms\Auth\LoginForm;
 use App\Livewire\Pages\Post\Index;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -18,9 +19,16 @@ class Login extends Component
     {
         $this->validate();
 
-        $this->form->login();
+        $credentials = [
+            'email' => $this->form->email,
+            'password' => $this->form->password
+        ];
 
-        return $this->redirect(Index::class);
+        if (Auth::attempt($credentials, $this->form->remember)) {
+            return $this->redirect(Index::class);
+        }
+
+        $this->addError('credentials', 'This credentials do not match our system. Please check your email and password.');
     }
 
     #[Layout('layouts.auth-card')]
