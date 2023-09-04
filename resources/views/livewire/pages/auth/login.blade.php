@@ -48,8 +48,7 @@
             </x-form.label>
         </div>
 
-        <a wire:navigate
-           href="{{ route('password.store') }}"
+        <a href="{{ route('password.store') }}"
            class="ml-auto text-sm text-primary-700 hover:underline dark:text-primary-500">
             {{ __('Forgot Password?') }}
         </a>
@@ -62,8 +61,7 @@
     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
         {{ __('Not registered?') }}
 
-        <a wire:navigate
-           href="{{ route('register') }}"
+        <a href="{{ route('register') }}"
            class="text-primary-700 hover:underline dark:text-primary-500">{{ __('Create account') }}
         </a>
     </div>

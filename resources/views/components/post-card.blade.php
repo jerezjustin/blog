@@ -4,8 +4,7 @@
     $postRoute = '';
 @endphp
 
-<div
-     class="mb-20 flex flex-col items-start text-gray-600 last:mb-0 dark:text-gray-400 md:mb-0 md:w-full md:p-12">
+<div class="mb-20 flex flex-col items-start text-gray-600 last:mb-0 dark:text-gray-400 md:mb-0 md:w-full md:p-12">
     <div class="flex gap-2">
         @foreach ($post->categories as $category)
             <span
@@ -24,10 +23,8 @@
         {{ $post->summary }}
     </p>
 
-    <div
-         class="mb-4 mt-auto flex w-full flex-wrap items-center border-b border-gray-200 pb-4 dark:border-gray-200/10">
-        <a wire:navigate
-           href="{{ $postRoute }}"
+    <div class="mb-4 mt-auto flex w-full flex-wrap items-center border-b border-gray-200 pb-4 dark:border-gray-200/10">
+        <a href="{{ $postRoute }}"
            class="inline-flex items-center text-primary-500">
             Learn More
 
@@ -59,8 +56,7 @@
 
             {{ $post->reads->count() }}
         </span>
-        <span
-              class="inline-flex items-center text-sm leading-none text-gray-400">
+        <span class="inline-flex items-center text-sm leading-none text-gray-400">
             <svg class="mr-1 h-4 w-4"
                  stroke="currentColor"
                  stroke-width="2"
@@ -81,8 +77,7 @@
             <span class="title-font text-gray-900 dark:text-white">
                 Posted by
 
-                <span
-                      class="font-medium transition-colors duration-300 ease-in-out hover:text-primary-500">
+                <span class="font-medium transition-colors duration-300 ease-in-out hover:text-primary-500">
                     {{ $post->author->name }}
                 </span>
             </span>

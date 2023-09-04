@@ -1,8 +1,7 @@
 <nav
      class="fixed left-0 top-0 z-20 w-full border-b border-gray-200 bg-white/25 backdrop-blur-lg dark:border-gray-200/10 dark:bg-gray-900/25">
     <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <a wire:navigate
-           href="/"
+        <a href="/"
            class="flex gap-2">
             <svg xmlns="http://www.w3.org/2000/svg"
                  fill="none"
@@ -76,8 +75,7 @@
             <ul class="mt-4 flex flex-col p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:p-0">
                 @guest
                     @if (!Route::is('login') && !Route::is('register'))
-                        <a wire:navigate
-                           href="{{ route('login') }}"
+                        <a href="{{ route('login') }}"
                            class="rounded-lg bg-primary-500 px-5 py-2.5 text-center text-sm font-medium text-white transition-colors duration-300 ease-in-out hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-500 dark:hover:bg-primary-600 dark:focus:ring-primary-600">
                             {{ __('Login') }}
                         </a>

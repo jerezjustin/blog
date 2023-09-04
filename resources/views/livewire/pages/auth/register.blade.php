@@ -67,8 +67,7 @@
     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
         {{ __('Already have an account?') }}
 
-        <a wire:navigate
-           href="{{ route('login') }}"
+        <a href="{{ route('login') }}"
            class="text-primary-700 hover:underline dark:text-primary-500">{{ __('Sign in') }}
         </a>
     </div>
