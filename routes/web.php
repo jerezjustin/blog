@@ -29,6 +29,8 @@ Route::middleware('guest')->group(function (): void {
 });
 
 Route::middleware('auth')->group(function (): void {
+    Route::get('/dashboard', Livewire\Pages\Dashboard::class)->name('dashboard');
+
     Route::post('/logout', function (Request $request) {
         Auth::guard('web')->logout();
 
