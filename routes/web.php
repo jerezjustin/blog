@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\PostController;
 use App\Livewire;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ Route::get('/', fn () => redirect()->route('posts.index'))->name('home');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::middleware('guest')->group(function (): void {
-    Route::get('/login', Livewire\Pages\Auth\Login::class)->name('login');
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
     Route::get('/register', Livewire\Pages\Auth\Register::class)->name('register');
     Route::get('/forgot-password', Livewire\Pages\Auth\ForgotPassword::class)->name('password.store');
     Route::get('/reset-password/{token}', Livewire\Pages\Auth\ResetPassword::class)->name('password.reset');
@@ -33,13 +36,5 @@ Route::middleware('guest')->group(function (): void {
 Route::middleware('auth')->group(function (): void {
     Route::get('/dashboard', Livewire\Pages\Dashboard::class)->name('dashboard');
 
-    Route::post('/logout', function (Request $request) {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect()->route('home');
-    })->name('logout');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
