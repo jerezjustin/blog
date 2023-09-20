@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Livewire\Pages\Auth;
 
 use App\Livewire\Forms\Auth\LoginForm;
-use App\Livewire\Pages\Post\Index;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
@@ -25,7 +24,7 @@ class Login extends Component
         ];
 
         if (Auth::attempt($credentials, $this->form->remember)) {
-            return $this->redirect(Index::class);
+            return redirect()->route('posts.index');
         }
 
         $this->addError('credentials', 'This credentials do not match our system. Please check your email and password.');

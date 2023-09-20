@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\PostController;
 use App\Livewire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn () => redirect()->route('posts.index'))->name('home');
-Route::get('/posts', Livewire\Pages\Post\Index::class)->name('posts.index');
+
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::middleware('guest')->group(function (): void {
     Route::get('/login', Livewire\Pages\Auth\Login::class)->name('login');

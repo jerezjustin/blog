@@ -29,7 +29,7 @@ class Register extends Component
 
         Auth::login($user);
 
-        return $this->redirect(Index::class);
+        return redirect()->route('home');
     }
 
     #[Layout('layouts.auth-card')]
