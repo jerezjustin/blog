@@ -15,7 +15,7 @@
 
             <x-form.input type="email" name="email" id="email" placeholder="name@company.com" />
 
-            <x-form.error name="form.email" />
+            <x-form.error name="email" />
         </div>
 
         <div>
@@ -25,7 +25,7 @@
 
             <x-form.input type="password" name="password" id="password" placeholder="••••••••" />
 
-            <x-form.error name="form.password" />
+            <x-form.error name="password" />
         </div>
 
         <div class="flex items-start">

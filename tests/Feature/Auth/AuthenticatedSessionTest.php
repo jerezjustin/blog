@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +14,7 @@ use function Pest\Laravel\post;
 
 uses(RefreshDatabase::class);
 
-test('users can authenticate using login screen', function () {
+test('users can authenticate using login screen', function (): void {
     $user = User::factory()->create([
         'email' => 'test@example.com',
         'password' => Hash::make($password = 'password')

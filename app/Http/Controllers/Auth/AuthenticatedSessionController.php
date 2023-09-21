@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -21,7 +23,7 @@ class AuthenticatedSessionController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
 
-        if (!Auth::attempt($credentials, $request->input('remember'))) {
+        if ( ! Auth::attempt($credentials, $request->input('remember'))) {
             throw ValidationException::withMessages([
                 'credentials' => trans('auth.failed')
             ]);
