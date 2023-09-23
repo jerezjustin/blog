@@ -2,19 +2,17 @@
 
 declare(strict_types=1);
 
-use App\Livewire\Pages\Auth\ForgotPassword;
-use App\Livewire\Pages\Auth\ResetPassword as ResetPasswordPage;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 
-use function Pest\Livewire\livewire;
-
-use Symfony\Component\HttpFoundation\Response;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 test('forgot password page can be rendered', function (): void {
-    livewire(ForgotPassword::class)->assertStatus(Response::HTTP_OK);
+    get(route('forgot-password'))
+        ->assertOk();
 });
 
 test('reset password link can be requested', function (): void {
@@ -22,10 +20,8 @@ test('reset password link can be requested', function (): void {
 
     $user = User::factory()->create();
 
-    livewire(ForgotPassword::class)
-        ->set('email', $user->email)
-        ->call('send')
-        ->assertHasNoErrors();
+    post(route('forgot-password'), ['email' => $user->email])
+        ->assertSessionHasNoErrors();
 
     Notification::assertSentTo($user, ResetPassword::class);
 });
@@ -35,22 +31,26 @@ test('password can be reset with valid token', function (): void {
 
     $user = User::factory()->create();
 
-    livewire(ForgotPassword::class)
-        ->set('email', $user->email)
-        ->call('send');
+    post(route('forgot-password'), [
+        'email' => $user->email
+    ])->assertSessionHasNoErrors();
 
     Notification::assertSentTo(
         $user,
         ResetPassword::class,
         function ($notification) use ($user) {
-            livewire(ResetPasswordPage::class, [
-                'token' => $notification->token,
-                'email' => $user->email
-            ])
-                ->assertSet('token', $notification->token)
-                ->assertSet('email', $user->email)
-                ->set('password', 'password')
-                ->set('password_confirmation', 'password');
+            post(
+                route(
+                    'password.reset',
+                    ['token' => $notification->token]
+                ),
+                [
+                    'token' => $notification->token,
+                    'email' => $user->email,
+                    'password' => 'password',
+                    'password_confirmation' => 'password'
+                ]
+            )->assertSessionHasNoErrors();
 
             return true;
         }

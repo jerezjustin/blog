@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-use App\Livewire;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserPostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,25 +22,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn () => redirect()->route('posts.index'))->name('home');
-Route::get('/posts', Livewire\Pages\Post\Index::class)->name('posts.index');
+
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::middleware('guest')->group(function (): void {
-    Route::get('/login', Livewire\Pages\Auth\Login::class)->name('login');
-    Route::get('/register', Livewire\Pages\Auth\Register::class)->name('register');
-    Route::get('/forgot-password', Livewire\Pages\Auth\ForgotPassword::class)->name('password.store');
-    Route::get('/reset-password/{token}', Livewire\Pages\Auth\ResetPassword::class)->name('password.reset');
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
+    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('forgot-password');
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'store']);
+
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('reset-password/{token}', [NewPasswordController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function (): void {
-    Route::get('/dashboard', Livewire\Pages\Dashboard::class)->name('dashboard');
-
-    Route::post('/logout', function (Request $request) {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect()->route('home');
-    })->name('logout');
+    Route::get('dashboard', [UserPostsController::class, 'index'])->name('dashboard');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

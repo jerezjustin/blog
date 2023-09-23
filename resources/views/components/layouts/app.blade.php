@@ -3,16 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible"
-          content="ie=edge">
-    <meta name="description"
-          content="@yield('description', 'Blog about PHP and Javascript ecosystems.')">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="@yield('description', 'Blog about PHP and Javascript ecosystems.')">
 
     <title>@yield('title', 'Blog | PHP & Javascript Ecosystems.')</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @livewireStyles()
 </head>
 
 <body class="flex min-h-screen flex-col bg-white dark:bg-ebony-950">
@@ -23,6 +22,8 @@
     </main>
 
     @include('partials.footer')
+
+    @livewireScripts()
 </body>
 
 </html>
