@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PostController;
 use App\Livewire;
@@ -21,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => redirect()->route('posts.index'))->name('home');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::middleware('guest')->group(function (): void {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -30,11 +32,14 @@ Route::middleware('guest')->group(function (): void {
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('/forgot-password', Livewire\Pages\Auth\ForgotPassword::class)->name('password.store');
-    Route::get('/reset-password/{token}', Livewire\Pages\Auth\ResetPassword::class)->name('password.reset');
+    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('forgot-password');
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'store']);
+
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('reset-password/{token}', [NewPasswordController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function (): void {
-    Route::get('/dashboard', Livewire\Pages\Dashboard::class)->name('dashboard');
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::get('dashboard', Livewire\Pages\Dashboard::class)->name('dashboard');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

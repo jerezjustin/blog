@@ -39,7 +39,7 @@
                 </x-form.label>
             </div>
 
-            <a href="{{ route('password.store') }}"
+            <a href="{{ route('forgot-password') }}"
                 class="ml-auto text-sm text-primary-700 hover:underline dark:text-primary-500">
                 {{ __('Forgot Password?') }}
             </a>
