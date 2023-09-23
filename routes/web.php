@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PostController;
-use App\Livewire;
+use App\Http\Controllers\UserPostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +40,6 @@ Route::middleware('guest')->group(function (): void {
 });
 
 Route::middleware('auth')->group(function (): void {
-    Route::get('dashboard', Livewire\Pages\Dashboard::class)->name('dashboard');
+    Route::get('dashboard', [UserPostsController::class, 'index'])->name('dashboard');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

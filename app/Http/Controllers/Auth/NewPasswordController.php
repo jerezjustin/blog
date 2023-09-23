@@ -9,8 +9,8 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class NewPasswordController extends Controller
 {
@@ -29,7 +29,7 @@ class NewPasswordController extends Controller
 
         $status = Password::reset(
             $validated,
-            function ($user) use ($validated) {
+            function ($user) use ($validated): void {
                 $user->forceFill([
                     'password' => Hash::make($validated['password']),
                     'remember_token' => Str::random(60)
@@ -39,9 +39,9 @@ class NewPasswordController extends Controller
             }
         );
 
-        return $status == Password::PASSWORD_RESET
+        return Password::PASSWORD_RESET === $status
             ? redirect()->route('login')
             : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);
+                ->withErrors(['email' => __($status)]);
     }
 }
