@@ -42,4 +42,13 @@ Route::middleware('guest')->group(function (): void {
 Route::middleware('auth')->group(function (): void {
     Route::get('dashboard', [UserPostsController::class, 'index'])->name('dashboard');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::resource('posts', PostController::class)->only(['create', 'store']);
+});
+
+Route::middleware('auth')->group(function (): void {
+    Route::get('dashboard', [UserPostsController::class, 'index'])->name('dashboard');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::resource('posts', PostController::class)->only(['create', 'store']);
 });

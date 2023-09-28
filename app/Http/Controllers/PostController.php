@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\PostStoreRequest;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -38,5 +40,17 @@ class PostController extends Controller
         return view('pages.post.index', [
             'posts' => $posts
         ]);
+    }
+
+    public function create(): View
+    {
+        return view('pages.post.create');
+    }
+
+    public function store(PostStoreRequest $request): RedirectResponse
+    {
+        $request->user()->posts()->create($request->validated());
+
+        return redirect()->route('dashboard');
     }
 }
