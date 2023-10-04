@@ -9,6 +9,8 @@
 
     <title>@yield('title', 'Blog | PHP & Javascript Ecosystems.')</title>
 
+    @stack('additional-resources')
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @livewireStyles()

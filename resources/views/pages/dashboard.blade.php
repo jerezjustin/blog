@@ -6,7 +6,7 @@
                 {{ __('Your posts') }}
             </h2>
 
-            <a href="{{ route('login') }}"
+            <a href="{{ route('posts.create') }}"
                 class="float-right rounded bg-primary-500 px-5 py-2.5 text-center text-sm font-medium text-white transition-colors duration-300 ease-in-out hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-500 dark:hover:bg-primary-600 dark:focus:ring-primary-600">
                 {{ __('Create new post') }}
             </a>

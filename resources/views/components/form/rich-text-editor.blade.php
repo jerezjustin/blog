@@ -10,9 +10,8 @@
     {{ $slot }}
 </x-form.textarea>
 
-@push('additional-scripts')
+@push('additional-resources')
     <script type="text/javascript">
-        console.log(window.localStorage.theme)
         tinymce.init({
             selector: '{{ '#' . $id }}',
             plugins: 'codesample',
