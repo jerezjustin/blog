@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\PostStoreRequest;
+use App\Http\Requests\Post\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -50,6 +54,24 @@ class PostController extends Controller
     public function store(PostStoreRequest $request): RedirectResponse
     {
         $request->user()->posts()->create($request->validated());
+
+        return redirect()->route('dashboard');
+    }
+
+    public function edit(Post $post): View
+    {
+        if (request()->user()->cannot('update', $post)) {
+            abort(Response::HTTP_NOT_FOUND);
+        }
+
+        return view('pages.post.edit', [
+            'post' => $post
+        ]);
+    }
+
+    public function update(UpdatePostRequest $request, Post $post): RedirectResponse
+    {
+        $post->update($request->validated());
 
         return redirect()->route('dashboard');
     }
