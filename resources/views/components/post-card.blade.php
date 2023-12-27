@@ -18,11 +18,15 @@
             @if (Route::is('dashboard'))
                 <div
                     class="sm:order-order-first mb-4 ml-auto flex basis-full border-separate items-center justify-end divide-x-2 divide-gray-200 dark:divide-gray-200/10 sm:mb-0 sm:basis-auto">
-                    <a href="{{ route('posts.edit', [ 'post' => $post ]) }}" class="px-3 transition-colors duration-300
-                    ease-in-out
-                    hover:text-primary-500">Edit</a>
-                    <a href=""
-                       class="px-3 transition-colors duration-300 ease-in-out hover:text-primary-500">Delete</a>
+                    <a href="{{ route('posts.edit', ['post' => $post]) }}"
+                        class="px-3 transition-colors duration-300 ease-in-out hover:text-primary-500">Edit</a>
+                    <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="px-3 transition-colors duration-300 ease-in-out hover:text-primary-500">
+                            Delete
+                        </button>
+                    </form>
                 </div>
             @endif
         @endauth
@@ -39,10 +43,10 @@
 
     <div class="mb-4 mt-auto flex w-full flex-wrap items-center border-b border-gray-200 pb-4 dark:border-gray-200/10">
         <a href="{{ $postRoute }}" class="inline-flex items-center text-primary-500">
-            Learn More
+            See More
 
             <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                 stroke-linecap="round" stroke-linejoin="round">
+                stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"></path>
                 <path d="M12 5l7 7-7 7"></path>
             </svg>
@@ -50,7 +54,7 @@
         <span
             class="ml-auto mr-3 inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400 dark:border-gray-200/10">
             <svg class="mr-1 h-4 w-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                 stroke-linejoin="round" viewBox="0 0 24 24">
+                stroke-linejoin="round" viewBox="0 0 24 24">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                 <circle cx="12" cy="12" r="3"></circle>
             </svg>
@@ -59,7 +63,7 @@
         </span>
         <span class="inline-flex items-center text-sm leading-none text-gray-400">
             <svg class="mr-1 h-4 w-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                 stroke-linejoin="round" viewBox="0 0 24 24">
+                stroke-linejoin="round" viewBox="0 0 24 24">
                 <path
                     d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
                 </path>

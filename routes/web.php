@@ -10,20 +10,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserPostsController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', fn () => redirect()->route('posts.index'))->name('home');
 
-Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+Route::resource('posts', PostController::class)->only(['index']);
 
 Route::middleware('guest')->group(function (): void {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -50,5 +39,5 @@ Route::middleware('auth')->group(function (): void {
     Route::get('dashboard', [UserPostsController::class, 'index'])->name('dashboard');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-    Route::resource('posts', PostController::class)->only(['create', 'store', 'edit']);
+    Route::resource('posts', PostController::class)->only(['create', 'store', 'edit', 'destroy']);
 });

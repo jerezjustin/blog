@@ -7,12 +7,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Post\PostStoreRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Models\Post;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
@@ -72,6 +70,13 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
         $post->update($request->validated());
+
+        return redirect()->route('dashboard');
+    }
+
+    public function destroy(Post $post): RedirectResponse
+    {
+        $post->delete();
 
         return redirect()->route('dashboard');
     }
