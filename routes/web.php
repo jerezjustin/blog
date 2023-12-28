@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => redirect()->route('posts.index'))->name('home');
 
-Route::get('posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::middleware('auth')->group(function (): void {
+    Route::get('dashboard', [UserPostsController::class, 'index'])->name('dashboard');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::resource('posts', PostController::class)->except(['index', 'show']);
+});
 
 Route::middleware('guest')->group(function (): void {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -29,16 +33,4 @@ Route::middleware('guest')->group(function (): void {
     Route::post('reset-password/{token}', [NewPasswordController::class, 'store']);
 });
 
-Route::middleware('auth')->group(function (): void {
-    Route::get('dashboard', [UserPostsController::class, 'index'])->name('dashboard');
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-    Route::resource('posts', PostController::class)->only(['create', 'store', 'update']);
-});
-
-Route::middleware('auth')->group(function (): void {
-    Route::get('dashboard', [UserPostsController::class, 'index'])->name('dashboard');
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-    Route::resource('posts', PostController::class)->only(['create', 'store', 'edit', 'destroy']);
-});
+Route::resource('posts', PostController::class)->only(['index', 'show']);

@@ -28,7 +28,6 @@ test('create new post page is rendered', function (): void {
 
 test('guest users cannot see create post page', function (): void {
     Auth::logout();
-    ;
 
     get(route('posts.create'))
         ->assertRedirectToRoute('login');
@@ -60,8 +59,8 @@ test('users can update their posts', function () {
         ...$post->toArray(),
         'title' => $title = 'Test Title'
     ])
-    ->assertSessionHasNoErrors()
-    ->assertRedirectToRoute('dashboard');
+        ->assertSessionHasNoErrors()
+        ->assertRedirectToRoute('dashboard');
 
     assertDatabaseHas('posts', [
         'id' => $post->id,
