@@ -44,6 +44,13 @@ class PostController extends Controller
         ]);
     }
 
+    public function show(Post $post): View
+    {
+        $post->load(['author', 'categories']);
+
+        return view('pages.post.show', compact('post'));
+    }
+
     public function create(): View
     {
         return view('pages.post.create');

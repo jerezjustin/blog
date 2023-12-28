@@ -8,10 +8,7 @@
     class="{{ Route::is('dashboard') ? 'md:py-12' : 'md:p-12' }} mb-20 flex flex-col items-start text-gray-600 last:mb-0 dark:text-gray-400 md:mb-0 md:w-full">
     <div class="flex w-full flex-wrap gap-2">
         @foreach ($post->categories as $category)
-            <span
-                class="rounded bg-primary-100 px-2 py-1 text-xs font-medium uppercase tracking-widest text-primary-500 dark:bg-primary-400/10">
-                {{ $category->name }}
-            </span>
+            <x-category-tag>{{ $category->name }}</x-category-tag>
         @endforeach
 
         @auth
@@ -42,7 +39,7 @@
     </p>
 
     <div class="mb-4 mt-auto flex w-full flex-wrap items-center border-b border-gray-200 pb-4 dark:border-gray-200/10">
-        <a href="{{ $postRoute }}" class="inline-flex items-center text-primary-500">
+        <a href="{{ route('posts.show', ['post' => $post]) }}" class="inline-flex items-center text-primary-500">
             See More
 
             <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
