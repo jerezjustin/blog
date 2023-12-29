@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Post\PostStoreRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -15,29 +16,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
-    public function index(Request $request): View
+    public function __construct(private readonly PostService $postService)
     {
-        $posts = Post::query();
+    }
 
-        $posts->with(['author', 'reads', 'comments']);
+    public function index(): View
+    {
+        $posts = $this->postService->getPaginatedPosts();
 
-        $posts->when($request->input('title'), function (Builder $query) use ($request): void {
-            $query->where('title', 'like', "%{$request->input('title')}%");
-        });
-
-        $posts->when($request->input('category'), function (Builder $query) use ($request): void {
-            $query->whereHas('categories', function (Builder $query) use ($request): void {
-                $query->where('slug', $request->input('category'));
-            });
-        });
-
-        $posts = $posts
-            ->orderBy(
-                $request->input('sortBy') ?? 'created_at',
-                $request->input('direction') ?? 'desc'
-            )
-            ->paginate(10)
-            ->withQueryString();
+        $posts->load(['author', 'reads', 'comments', 'categories']);
 
         return view('pages.post.index', [
             'posts' => $posts
@@ -46,7 +33,7 @@ class PostController extends Controller
 
     public function show(Post $post): View
     {
-        $post->load(['author', 'categories']);
+        $post = $post->load(['author', 'categories']);
 
         return view('pages.post.show', compact('post'));
     }
